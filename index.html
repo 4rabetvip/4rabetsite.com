@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--     
+https://api.jsonbin.io/v3/b/67ea9e3a8a456b79667ff984
+
+fetch("https://api.jsonbin.io/v3/b/67ea9e3a8a456b79667ff984", {
+    headers: { "X-Master-Key": "$2a$10$KxrIzD6vk0We8pfpySnbfOvkTSyr5i/RKwnItuvXA0KYkMEPRo/zC" }
+})
+.then(res => res.json())
+.then(data => console.log(data.record)); 
+
+to deleat all data 👇👇
+
+fetch("https://api.jsonbin.io/v3/b/67ea9e3a8a456b79667ff984", {
+    method: "PUT",
+    headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": "$2a$10$KxrIzD6vk0We8pfpySnbfOvkTSyr5i/RKwnItuvXA0KYkMEPRo/zC"
+    },
+    body: JSON.stringify({ contacts: [] })  // Reset bin with an empty list
+})
+.then(res => res.json())
+.then(data => console.log("All data deleted!", data)); 
+
+
+specific deleat data
+
+fetch("https://api.jsonbin.io/v3/b/67ea9e3a8a456b79667ff984", {
+    headers: { "X-Master-Key": "$2a$10$KxrIzD6vk0We8pfpySnbfOvkTSyr5i/RKwnItuvXA0KYkMEPRo/zC" }
+})
+.then(res => res.json())
+.then(data => {
+    let contacts = data.record.contacts;
+
+    // Remove a specific email
+    contacts = contacts.filter(c => c.email !== "user@example.com"); 
+
+    // Save the updated contacts back to JSONBin
+    fetch("https://api.jsonbin.io/v3/b/YOUR_BIN_ID", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key": "YOUR_SECRET_KEY"
+        },
+        body: JSON.stringify({ contacts })
+    })
+    .then(res => res.json())
+    .then(updated => console.log("Updated contacts:", updated));
+});
+
+
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<script src="server.js"></script>
+
+<body>
+    <div class="overlay"></div>
+    <div class="login-container">
+        <button class="close-button">&times;</button>
+        <!-- <div class="right-section">
+            <img src="login-image.png" alt="Login Illustration" class="login-image">
+        </div> -->
+        <div class="right-section">
+            <div class="login-box">
+                <h3 class="login-title">LOGIN</h3>
+                <div class="dialog-box">
+                    <button class="dialog-option selected" id="email-tab"><img src="emoji.png" alt="emoji" width="30" height="20">
+                        <span style="color: white; font-weight: bold;">Email</span>
+
+</button>
+                    <button class="dialog-option" id="phone-tab"><img src="emojis.png" alt="emoji" width="15" height="20"> Phone</button>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="E-mail" onblur="validateEmail()">
+                </div>
+                <p id="email-error" class="error-message">E-mail must be valid</p>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" onblur="validatePassword()">
+                </div>
+                <p id="password-error" class="error-message">Min 6 characters</p>
+                <p class="forgot-password">Don't remember? <a href="#" class="recover" onclick="handleRecoverPassword()" style="color:white;">Recover a password</a></p>
+                <div class="spacer-large"></div>
+                <p class="signup-text">Don't have an account?</p>
+                <a href="#" class="signup-btn">Sign up</a>
+                <button class="signin-btn" id="sign-in-btn" onclick="handleSignIn()">SIGN IN</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
